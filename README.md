@@ -1,10 +1,10 @@
 # Django Questions
 
-<img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="800" height="600">
+<img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="854" height="480">
 
 ## What is the difference between Flask and Django?
 
-<img src="./images/Flask-vs-Django.png" alt="Picture" width="800" height="600">
+<img src="./images/Flask-vs-Django.png" alt="Picture" width="1920" height="1080">
 
 | Feature               | Flask                                     | Django                           |
 |-----------------------|-------------------------------------------|----------------------------------|
