@@ -1,10 +1,10 @@
 # Django Questions
 
-<img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="854" height="480">
+<img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="auto" height="auto">
 
 ## What is the difference between Flask and Django?
 
-<img src="./images/Flask-vs-Django.png" alt="Picture" width="854" height="480">
+<img src="./images/Flask-vs-Django.png" alt="Picture" width="auto" height="auto">
 
 | Feature               | Flask                                     | Django                           |
 |-----------------------|-------------------------------------------|----------------------------------|
@@ -33,7 +33,7 @@
 - View: A request handler that returns the relevant template and content based on the request from the user
 - Template: A text file (like an HTML file) containing the layout of the web page, with logic on how to display the  data.
 
-<img src="./images/1_XohhamnRotq53fQaY5HQfA.png" alt="Picture" width="800" height="600">
+<img src="./images/1_XohhamnRotq53fQaY5HQfA.png" alt="Picture" width="auto" height="auto">
 
 **Model**
 
@@ -63,13 +63,127 @@
 - Django also provides a way to navigate around the different pages in a website.
 - When a user requests a URL, Django decides which view it will send it to.
 - This is done in a file called `urls.py.`
-- 
+
 <img src="./images/url.png" alt="Picture" width="auto" height="auto">
 
-## How MVT pattern is Django's approach work under the hood?
+## How MVT pattern Django's approach work under the hood?
 
 1. Django receives the URL, checks the `urls.py` file, and calls the view that matches the URL.
 2. The view, located in `views.py`, checks for relevant models.
 3. The models are imported from the `models.py` file.
 4. The view then sends the data to a specified template in the `template` folder.
 5. The template contains HTML and Django tags, and with the data it returns finished HTML content back to the browser.
+
+## What is Virtual Environment ?
+
+<img src="./images/python-virtual.png" alt="Picture" width="auto" height="auto">
+
+- A virtual environment is a tool that helps to keep dependencies required by different projects separate by creating isolated Python virtual environments for them. This is one of the most important tools that most Python developers use.
+
+### Why do we need a virtual environment?
+- Creating a Python virtual environment allows you to manage dependencies separately for different projects, preventing conflicts and maintaining cleaner setups. With Python’s venv module, you can create isolated environments that use different versions of libraries or Python itself.
+
+## How to Create a Django Project
+
+1. **First, create a directory for the project:**
+
+   <img src="./images/1.png" alt="Picture" width="auto" height="auto">
+
+   - Use the following command to create a directory:
+     ```bash
+     mkdir first_project
+     ```
+   - Navigate into the directory:
+     ```bash
+     cd first_project
+     ```
+
+---
+
+2. **Set up a virtual environment:**
+
+   <img src="./images/2.png" alt="Picture" width="auto" height="auto">
+
+   - Create a virtual environment using:
+     ```bash
+     python -m venv env
+     ```
+   - If you encounter issues, install `virtualenv` globally:
+     ```bash
+     pip install virtualenv
+     ```
+     Then, try creating the virtual environment again.
+
+---
+
+3. **Activate the virtual environment:**
+
+   <img src="./images/3.png" alt="Picture" width="auto" height="auto">
+
+   - On macOS/Linux:
+     ```bash
+     source env/bin/activate
+     ```
+   - On Windows:
+     ```bash
+     env\Scripts\activate
+     ```
+
+---
+
+4. **Install Django:**
+
+   <img src="./images/4.png" alt="Picture" width="auto" height="auto">
+
+   - Use `pip` to install Django:
+     ```bash
+     pip install Django
+     ```
+
+---
+
+5. **Create a Django project:**
+
+   <img src="./images/5.png" alt="Picture" width="auto" height="auto">
+
+   - Use the `django-admin` command to create a new project:
+     ```bash
+     django-admin startproject login_system
+     ```
+     - **`django-admin`**: Django’s command-line utility for administrative tasks.
+     - **`startproject`**: The command to create a new Django project.
+     - **`login_system`**: The name of your project.
+
+---
+
+6. **Navigate into the project directory:**
+
+   - Move into the newly created project directory:
+     ```bash
+     cd login_system
+     ```
+
+---
+
+7. **Run the development server:**
+
+   <img src="./images/6.png" alt="Picture" width="auto" height="auto">
+
+   - Start the Django development server:
+     ```bash
+     python manage.py runserver
+     ```
+
+---
+
+8. **Verify the project:**
+
+   - Open your browser and navigate to:
+     ```
+     http://127.0.0.1:8000/
+     ```
+   - If everything is set up correctly, you should see the Django welcome page:
+
+     <img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="auto" height="auto">
+
+---
