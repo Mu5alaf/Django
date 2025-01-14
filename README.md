@@ -63,7 +63,7 @@
 - Django also provides a way to navigate around the different pages in a website.
 - When a user requests a URL, Django decides which view it will send it to.
 - This is done in a file called `urls.py.`
-- 
+
 <img src="./images/url.png" alt="Picture" width="auto" height="auto">
 
 ## How MVT pattern is Django's approach work under the hood?
