@@ -49,7 +49,7 @@
 - A view is a function or method that takes http requests as arguments, imports the relevant model(s), and finds out what data to send to the template, and returns the final result.
 - The views are usually located in a file called `views.py.`
 
-<img src="./images/views.png" alt="Picture" width="800" height="500">
+<img src="./images/views.png" alt="Picture" width="auto" height="auto">
 
 **Template**
 
@@ -57,14 +57,14 @@
 - Templates are often `.html` files, with HTML code describing the layout of a web page, but it can also be in other file formats to present other results, but we will concentrate on `.html` files.
 - Django uses standard HTML to describe the layout, but uses Django tags to add logic:
 
-<img src="./images/template.png" alt="Picture" width="800" height="500">
+<img src="./images/template.png" alt="Picture" width="auto" height="auto">
 **URLs**
 
 - Django also provides a way to navigate around the different pages in a website.
 - When a user requests a URL, Django decides which view it will send it to.
 - This is done in a file called `urls.py.`
 - 
-<img src="./images/url.png" alt="Picture" width="800" height="500">
+<img src="./images/url.png" alt="Picture" width="auto" height="auto">
 
 ## How MVT pattern is Django's approach work under the hood?
 
