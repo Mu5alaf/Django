@@ -33,7 +33,7 @@
 - View: A request handler that returns the relevant template and content based on the request from the user
 - Template: A text file (like an HTML file) containing the layout of the web page, with logic on how to display the  data.
 
-<img src="./images/1_XohhamnRotq53fQaY5HQfA.png" alt="Picture" width="800" height="600">
+<img src="./images/1_XohhamnRotq53fQaY5HQfA.png" alt="Picture" width="800" height="500">
 
 **Model**
 
@@ -42,14 +42,14 @@
 - Django, with ORM, makes it easier to communicate with the database, without having to write complex SQL statements.
 - The models are usually located in a file called `models.py.`
 
-<img src="./images/models.png" alt="Picture" width="800" height="400">
+<img src="./images/models.png" alt="Picture" width="800" height="500">
 
 **View**
 
 - A view is a function or method that takes http requests as arguments, imports the relevant model(s), and finds out what data to send to the template, and returns the final result.
 - The views are usually located in a file called `views.py.`
 
-<img src="./images/views.png" alt="Picture" width="800" height="400">
+<img src="./images/views.png" alt="Picture" width="800" height="500">
 
 **Template**
 
@@ -64,7 +64,7 @@
 - When a user requests a URL, Django decides which view it will send it to.
 - This is done in a file called `urls.py.`
 - 
-<img src="./images/url.png" alt="Picture" width="800" height="400">
+<img src="./images/url.png" alt="Picture" width="800" height="500">
 
 ## How MVT pattern is Django's approach work under the hood?
 
