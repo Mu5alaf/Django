@@ -184,6 +184,6 @@
      ```
    - If everything is set up correctly, you should see the Django welcome page:
 
-     <img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="auto" height="auto">
+     <img src="./images/runn.png" alt="Picture" width="auto" height="auto">
 
 ---
