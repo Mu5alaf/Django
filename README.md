@@ -1,10 +1,10 @@
 # Django Questions
 
-<img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="854" height="480">
+<img src="./images/0_5mCMOCogRI-yzfUM.gif" alt="Picture" width="auto" height="auto">
 
 ## What is the difference between Flask and Django?
 
-<img src="./images/Flask-vs-Django.png" alt="Picture" width="854" height="480">
+<img src="./images/Flask-vs-Django.png" alt="Picture" width="auto" height="auto">
 
 | Feature               | Flask                                     | Django                           |
 |-----------------------|-------------------------------------------|----------------------------------|
@@ -33,7 +33,7 @@
 - View: A request handler that returns the relevant template and content based on the request from the user
 - Template: A text file (like an HTML file) containing the layout of the web page, with logic on how to display the  data.
 
-<img src="./images/1_XohhamnRotq53fQaY5HQfA.png" alt="Picture" width="800" height="600">
+<img src="./images/1_XohhamnRotq53fQaY5HQfA.png" alt="Picture" width="auto" height="auto">
 
 **Model**
 
