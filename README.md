@@ -42,7 +42,7 @@
 - Django, with ORM, makes it easier to communicate with the database, without having to write complex SQL statements.
 - The models are usually located in a file called `models.py.`
 
-<img src="./images/models.png" alt="Picture" width="800" height="600">
+<img src="./images/models.png" alt="Picture" width="1852" height="708">
 
 **View**
 
