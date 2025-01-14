@@ -66,7 +66,7 @@
 
 <img src="./images/url.png" alt="Picture" width="auto" height="auto">
 
-## How MVT pattern is Django's approach work under the hood?
+## How MVT pattern Django's approach work under the hood?
 
 1. Django receives the URL, checks the `urls.py` file, and calls the view that matches the URL.
 2. The view, located in `views.py`, checks for relevant models.
