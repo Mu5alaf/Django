@@ -4,7 +4,7 @@
 
 ## What is the difference between Flask and Django?
 
-<img src="./images/Flask-vs-Django.png" alt="Picture" width="1920" height="1080">
+<img src="./images/Flask-vs-Django.png" alt="Picture" width="854" height="480">
 
 | Feature               | Flask                                     | Django                           |
 |-----------------------|-------------------------------------------|----------------------------------|
