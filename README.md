@@ -610,9 +610,10 @@ Django
 
 ---
 # Resources:
-. [Django](https://www.djangoproject.com/)
-. [realpython](https://realpython.com/tutorials/django/)
-. [w3schools](https://www.w3schools.com/django/index.php)
-. [medium](https://medium.com/django-unleashed/django-project-structure-a-comprehensive-guide-4b2ddbf2b6b8)
-. [medium](https://medium.com/@ashishpandey2062/django-class-based-views-vs-generic-class-based-views-2ce548c073db#:~:text=While%20CBVs%20are%20powerful%2C%20Django,use%20implementations%20for%20common%20tasks.)
-. [dev](https://dev.to/yokwejuste/django-signals-mastery-144d)
+
+- [Django](https://www.djangoproject.com/)
+- [realpython](https://realpython.com/tutorials/django/)
+- [w3schools](https://www.w3schools.com/django/index.php)
+- [medium](https://medium.com/django-unleashed/django-project-structure-a-comprehensive-guide-4b2ddbf2b6b8)
+- [medium](https://medium.com/@ashishpandey2062/django-class-based-views-vs-generic-class-based-views-2ce548c073db#:~:text=While%20CBVs%20are%20powerful%2C%20Django,use%20implementations%20for%20common%20tasks.)
+- [dev](https://dev.to/yokwejuste/django-signals-mastery-144d)
