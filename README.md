@@ -609,8 +609,6 @@ Django
 - Django provides a feature to prevent such types of malicious attacks. When a user is authenticated and surfing on the website, Django generates a unique CSRF token for each session. This token is included in forms or requests sent by the user and is checked by the server to verify that the request is coming from the authenticated user and not from a malicious source.
 
 ---
-
----
 # Resources:
 . [Django](https://www.djangoproject.com/)
 . [realpython](https://realpython.com/tutorials/django/)
