@@ -351,9 +351,270 @@ first_project/
 | `python manage.py dumpdata <app>`    | Dumps data from the database into a fixture (e.g., JSON or XML).                |
 
 ---
+### What is Django signals?
+- Django signals are a form of signal dispatching mechanisms that allow senders to notify a set of receivers when certain actions are executed in Django Framework.
 
+<img src="./images/signals.jpeg" alt="Picture" width="auto" height="auto">
+
+### Why Use Django Signals?
+- Django signals shine in scenarios requiring actions to be triggered by changes in your models. They facilitate a clean, decoupled architecture by allowing different parts of your application to communicate indirectly. Whether you're logging activity, sending notifications, or updating related objects upon changes, signals provide a robust, scalable way to implement these features without tightly coupling your components.
+
+### How do Django signals work?
+- In a communication system, a transmitter encodes a message to create a signal, which is carried to a receiver by the communication channel. In Django we have a similar approach, at its core, the signal dispatching system enables certain senders (usually Django models) to notify asset of receivers (functions or methods) when certain events occur. For instance, you might want to automatically send a welcome email to a user immediately after their account has been created. With Django signals, this process is streamlined: a signal is dispatched when a new user is saved, and a receiver function listening for this signal triggers the email sending process
+
+- **Example**
+    . pre_save: is event happend befor save to database.
+    . post_save: is event happend after save to database.
+    
+- in this example The post_save signal is triggered after an instance of a model is saved to the database. 
+    ````
+    ### signals.py file
+    from django.db.models. signals import post_save
+    from django.dispatch import receiver
+    from .models import ArticleComments
+
+    @receiver(post_save, sender=ArticleComments)
+    def notify_author(sender, instance, created, ** kwargs) :
+        if created:
+        # call your function to notify instance.article.author
+   
+    ````
+- in this example pre_save is called right before the model save() method,For example, if we are using pre_save for ArticleComments and we want to check and remove any abuse words from comments before it is saved in our model, we can do it like this
+  ````
+  if is_abuse(instance.comment):
+    instance.comment = remove_abusive(instance.comment)
+  ````
+### Summarizer
+| Signal Name      | Description                                                                 | Use Cases                                                                 | Implementation Note                                                                 |
+|------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `pre_save`       | Dispatched before a model’s `save()` method is called.                      | Auto-timestamping, data validation/normalization, cache invalidation.     | Connect signal to a receiver function that performs necessary actions before a model instance is saved. |
+| `post_save`      | Dispatched after a model’s `save()` method is called.                       | Sending signals, post-save operations like sending emails or processing data. | Implement a receiver that acts on model instance after it's been saved to the database. |
+| `pre_delete`     | Dispatched before a model’s `delete()` method or queryset’s `delete()` is called. | Cleaning up related objects, logging deletions.                           | Connect to a receiver that handles cleanup or logging before an instance is deleted. |
+| `post_delete`    | Dispatched after a model’s `delete()` method or queryset’s `delete()` is called. | Post-delete actions, such as cache invalidation or updating related data. | Use receivers to perform actions after an instance is deleted. |
+| `m2m_changed`    | Dispatched when a `ManyToManyField` on a model is changed.                  | Tracking changes in many-to-many relationships, updating caches, validating changes. | Attach a receiver to handle the specific actions (add, remove, clear) for m2m changes. |
+| `pre_init`       | Dispatched before a model’s `__init__` method is called.                    | Setting up non-database attributes, modifying initialization parameters.  | Define a receiver to modify attributes or perform actions before model instance initialization. |
+| `post_init`      | Dispatched after a model’s `__init__` method is called.                     | Additional setup based on the initialized model instance.                 | Implement a receiver to perform setup actions that depend on the initialized state of the instance. |
+| `request_started`| Dispatched at the start of each HTTP request.                               | Request logging/monitoring, setting up request-specific resources.        | Connect a receiver function to perform actions at the beginning of a request. |
+| `request_finished`| Dispatched at the end of each HTTP request.                                | Cleanup actions post-request, logging request metrics.                    | Use a receiver to clean up resources or log information after a request has been processed. |
+| `class_prepared` | Dispatched once a model class is fully prepared.                            | Dynamically adding fields/methods to models, adjusting model attributes.  | Attach a receiver to modify or enhance model classes dynamically. |
+| `pre_migrate`    | Dispatched before running migrations.                                       | Preparing data or schema changes not covered by migrations, setup actions before migration. | Implement actions to be performed before migrations are applied to the database. |
+| `post_migrate`   | Dispatched after running migrations.                                        | Data consistency checks, performing custom schema updates.                | Use receivers to ensure data integrity or make additional changes after migrations. |
+
+---
+### Django hierarchy Views
+````
+Django
+├── Admin (Built-in Admin Interface)
+│   └── Manages database records (CRUD operations)
+│
+├── Views
+│   ├── Function-Based Views (FBVs)
+│   │   └── Simple, direct handling of HTTP requests
+│   │
+│   └── Class-Based Views (CBVs)
+│       ├── Reusable, structured views
+│       └── Generic Class-Based Views (GCBVs)
+│           ├── ListView
+│           ├── DetailView
+│           ├── CreateView
+│           ├── UpdateView
+│           └── DeleteView
+│
+└── Django REST Framework (DRF)
+    ├── APIViews (FBV-style)
+    └── ViewSets (CBV-style)
+        ├── ModelViewSet
+        ├── ReadOnlyModelViewSet
+        └── Custom ViewSets
+````
+
+- Django views are divided into two major categories:
+. Function Based Django Views
+. Class Based Django Views
+
+<img src="./images/cf.png" alt="Picture" width="auto" height="auto">
+
+---
+### Function Based Views in Django
+
+- Function based views are written using a function in python which receives as an argument HttpRequest object and returns an HttpResponse Object. Function based views are generally divided into 4 basic strategies, i.e., CRUD (Create, Retrieve, Update, Delete). CRUD is the base of any framework one is using for development. 
+  
+  ````
+  from django.http import HttpResponse
+  def dashboard_view(request):
+      if request.method == 'GET'
+          return HttpResponse("Welcome to Dashboard")
+      else:
+          # send status= 405 which means method not allowed
+          return HttpResponse(status=405)
+    ````
+---
+### Class Based Views in Django
+
+- Class-based views provide an alternative way to implement views as Python objects instead of functions. They do not replace function-based views, but have certain differences and advantages when compared to function-based views.
+  1. Organization of code related to specific HTTP methods (GET, POST, etc.) can be addressed by separate methods instead of conditional branching.
+  2. Object oriented techniques such as mixins (multiple inheritance) can be used to factor code into reusable components.
+   
+   ````
+    from django.http import HttpResponse  
+    from django.views import View  
+    class NewView(View):  
+    def get(self, request):  
+        # View logic will place here  
+        return HttpResponse('response')  
+   ````
+---
+
+### Generic Class-Based Views
+
+- Class Based Views (GCBVs). These are pre-built, reusable views that handle common patterns in web development. They’re designed to simplify your code even more by providing ready-to-use implementations for common tasks.
+  ````
+  from django.views.generic import ListView
+  from .models import Book
+
+  class BookListView(ListView):
+      model = Book
+      template_name = 'book_list.html'
+      context_object_name = 'books'
+  ````
+- simply fetched all the Book’s objects from the db and passes those objects to specific template.
+
+---
+
+### When?
+
+- Use Class-Based Views when?
+  - You need full control: CBVs allow you to define exactly how your view behaves
+  - You’re implementing complex logic: If your view doesn’t fit into common patterns, a CBV gives you the flexibility you need.
+  - You’re creating reusable view logic: If you plan to inherit from this view in multiple places, a CBV can serve as a great base class.
+
+- Use Generic Class-Based Views when?
+  - You’re performing common operations: If you’re doing standard CRUD operations, GCBVs can save you a lot of time.
+  - You want to leverage built-in functionality: GCBVs come with features like pagination and form handling out of the box.
+  - You’re aiming for rapid development: GCBVs can significantly speed up your development process for standard web applications.
+---
+### What is Middleware in Django?
+
+<img src="./images/midwa.png" alt="Picture" width="auto" height="auto">
+
+- Middleware is a set of hooks into Django's request/response processing pipeline.
+
+### How does Middleware work?
+
+- When a user makes a request from your application, a WSGI handler is instantiated, which handles the following things:
+  1. Imports project’s settings.py file and Django exception classes.
+  2. Loads all the middleware classes which are written in MIDDLEWARE tuple located in settings.py file
+  3. Builds list of methods which handle processing of request, view, response & exception.
+  4. Loops through the request methods in order.
+  5. Resolves the requested URL
+  6. Loops through each of the view processing methods
+  7. Calls the view function
+  8. Processes exception methods (if any)
+  9. Loops through each of the response methods in the reverse order from request middleware.
+  10. Builds a return value and makes a call to the callback function.
+
+### What are the types of Middleware?
+- There are two types of Middleware in Django:
+  - Built-in Middleware
+  - Custom Middleware
+
+- Built-in Middleware are provided by default in Django when you create your project. You can check the default Middleware in settings.py file of your project.
+
+    ````
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ]
+    ````
+- Custom Middleware — You can write your own middleware which can be used throughout your project. Let’s see how we can do that!
+---
+
+### What is the purpose of the manage.py file ?
+
+- The manage.py file in a Django project serves as a command-line utility that helps manage various aspects of the project. It is a convenient tool that allows developers to perform tasks such as running development servers, creating database tables, executing tests, and managing Django applications.
+
+---
+
+## Django Exceptions
+
+### Core Exceptions
+
+| Exception                | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **AppRegistryNotReady**   | Raised when attempting to use models before the app loading process.        |
+| **ObjectDoesNotExist**    | The base class for `DoesNotExist` exceptions.                               |
+| **EmptyResultSet**        | Raised if a query does not return any result.                               |
+| **FieldDoesNotExist**     | Raised when the requested field does not exist.                             |
+| **MultipleObjectsReturned** | Raised by a query if only one object is expected, but multiple are returned. |
+| **SuspiciousOperation**   | Raised when a user performs an operation considered suspicious (security).  |
+| **PermissionDenied**      | Raised when a user does not have permission to perform the requested action. |
+| **ViewDoesNotExist**      | Raised by `django.urls` when a requested view does not exist.               |
+| **MiddlewareNotUsed**     | Raised when a middleware is not used in the server configuration.           |
+| **ImproperlyConfigured**  | Raised when Django is improperly configured.                                |
+| **FieldError**            | Raised when there is a problem with a model field.                          |
+| **ValidationError**       | Raised when data validation fails for a form or model field.                |
+
+---
+
+### Django URL Resolver Exceptions
+
+| Exception                | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **Resolver404**           | Raised when the path passed to `resolve()` does not map to a view.          |
+| **NoReverseMatch**        | Raised when a matching URL in your URLconf cannot be identified.            |
+
+---
+
+### Django Database Exceptions
+
+| Exception                | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **DatabaseError**         | Occurs when the database is not available.                                  |
+| **IntegrityError**        | Occurs when an insertion query violates database integrity.                 |
+| **DataError**             | Raised when data-related issues occur in the database.                      |
+
+---
+
+### Django HTTP Exceptions
+
+| Exception                | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **UnreadablePostError**   | Raised when a user cancels an upload.                                       |
+
+---
+
+### Django Transaction Exceptions
+
+| Exception                | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **TransactionManagementError** | Raised for any problems related to database transactions.               |
+
+---
+
+### CSRF token in Django
+
+- Django provides a feature known as a CSRF token to get away from CSRF attacks that can be very dangerous. when the session of the user starts on a website, a token is generated which is then cross-verified with the token present with the request whenever a request is being processed.
+
+### What is a CSRF?
+
+- CSRF means cross-site request forgery. In this type of attack, the attacker sends a link in the form of sms, email, or chat. In this way, the attacker tricks the user who is already authenticated on the website to perform various actions such as transfer of funds, change of email, and so on. Depending upon the nature of the attack the attacker may take full access to the account.
+
+### What is CSRF Token in Django?
+
+- Django provides a feature to prevent such types of malicious attacks. When a user is authenticated and surfing on the website, Django generates a unique CSRF token for each session. This token is included in forms or requests sent by the user and is checked by the server to verify that the request is coming from the authenticated user and not from a malicious source.
+
+---
+
+---
 # Resources:
 . [Django](https://www.djangoproject.com/)
 . [realpython](https://realpython.com/tutorials/django/)
 . [w3schools](https://www.w3schools.com/django/index.php)
 . [medium](https://medium.com/django-unleashed/django-project-structure-a-comprehensive-guide-4b2ddbf2b6b8)
+. [medium](https://medium.com/@ashishpandey2062/django-class-based-views-vs-generic-class-based-views-2ce548c073db#:~:text=While%20CBVs%20are%20powerful%2C%20Django,use%20implementations%20for%20common%20tasks.)
+. [dev](https://dev.to/yokwejuste/django-signals-mastery-144d)
