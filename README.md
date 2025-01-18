@@ -372,7 +372,8 @@ first_project/
     . post_save: is event happend after save to database.
     
 - in this example The post_save signal is triggered after an instance of a model is saved to the database. 
-    ````
+    
+    ````python
     ### signals.py file
     from django.db.models. signals import post_save
     from django.dispatch import receiver
@@ -382,10 +383,11 @@ first_project/
     def notify_author(sender, instance, created, ** kwargs) :
         if created:
         # call your function to notify instance.article.author
-   
     ````
+
 - in this example pre_save is called right before the model save() method,For example, if we are using pre_save for ArticleComments and we want to check and remove any abuse words from comments before it is saved in our model, we can do it like this
-  ````
+
+  ````python
   if is_abuse(instance.comment):
     instance.comment = remove_abusive(instance.comment)
   ````
@@ -410,7 +412,8 @@ first_project/
 ---
 
 ## Django hierarchy Views
-````
+
+````bash
 Django
 ├── Admin (Built-in Admin Interface)
 │   └── Manages database records (CRUD operations)
