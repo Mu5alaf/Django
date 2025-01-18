@@ -192,7 +192,7 @@
      <img src="./images/runn.png" alt="Picture" width="auto" height="auto">
 
 ---
-### Django Project Structure
+## Django Project Structure
 
 ```
 first_project/
@@ -214,7 +214,7 @@ first_project/
 - __ init __.py:  Python uses this file to declare a folder as a package, which allows Django to use code from different apps to compose the overall functionality of your web application. You probably won’t have to touch this file.
 
 ---
-### Django app
+## Django app
 
 - Every project you build with Django can contain multiple Django apps. When you ran the startproject command in the previous section, you created a management app that you’ll need for every default project that you’ll build. Now, you’ll create a Django app that’ll contain the specific functionality of your web application.
 - python manage.py startapp < appname >
@@ -259,7 +259,7 @@ first_project/
 
 ---
 
-### Directory Hierarchy
+## Directory Hierarchy
 
 - Maintaining a clean and organized project structure is crucial for the readability, scalability, and maintainability of your Django project. Following best practices in project structuring ensures that your codebase is easily understandable and adaptable.
 
@@ -290,7 +290,7 @@ first_project/
 
 ---
 
-### What is Django Admin ?
+## What is Django Admin ?
 
 - The Django admin panel is a built-in, user-friendly interface that allows developers and administrators to manage the data and administration of a Django project effortlessly. It provides a convenient way to perform common tasks such as creating, reading, updating, and deleting data in your database without having to write custom views or templates.
 
@@ -314,7 +314,7 @@ first_project/
 
 - To be able to log into the admin application, we need to create a user.
 
-```
+```bash
   $ python manage.py createsuperuser
   Username: admin
   Email address: admin@example.com
@@ -351,15 +351,19 @@ first_project/
 | `python manage.py dumpdata <app>`    | Dumps data from the database into a fixture (e.g., JSON or XML).                |
 
 ---
-### What is Django signals?
+
+## What is Django signals?
+
 - Django signals are a form of signal dispatching mechanisms that allow senders to notify a set of receivers when certain actions are executed in Django Framework.
 
 <img src="./images/signals.jpeg" alt="Picture" width="auto" height="auto">
 
-### Why Use Django Signals?
+## Why Use Django Signals?
+
 - Django signals shine in scenarios requiring actions to be triggered by changes in your models. They facilitate a clean, decoupled architecture by allowing different parts of your application to communicate indirectly. Whether you're logging activity, sending notifications, or updating related objects upon changes, signals provide a robust, scalable way to implement these features without tightly coupling your components.
 
-### How do Django signals work?
+## How do Django signals work?
+
 - In a communication system, a transmitter encodes a message to create a signal, which is carried to a receiver by the communication channel. In Django we have a similar approach, at its core, the signal dispatching system enables certain senders (usually Django models) to notify asset of receivers (functions or methods) when certain events occur. For instance, you might want to automatically send a welcome email to a user immediately after their account has been created. With Django signals, this process is streamlined: a signal is dispatched when a new user is saved, and a receiver function listening for this signal triggers the email sending process
 
 - **Example**
@@ -384,7 +388,9 @@ first_project/
   if is_abuse(instance.comment):
     instance.comment = remove_abusive(instance.comment)
   ````
-### Summarizer
+
+## Summarizer
+
 | Signal Name      | Description                                                                 | Use Cases                                                                 | Implementation Note                                                                 |
 |------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `pre_save`       | Dispatched before a model’s `save()` method is called.                      | Auto-timestamping, data validation/normalization, cache invalidation.     | Connect signal to a receiver function that performs necessary actions before a model instance is saved. |
@@ -401,7 +407,8 @@ first_project/
 | `post_migrate`   | Dispatched after running migrations.                                        | Data consistency checks, performing custom schema updates.                | Use receivers to ensure data integrity or make additional changes after migrations. |
 
 ---
-### Django hierarchy Views
+
+## Django hierarchy Views
 ````
 Django
 ├── Admin (Built-in Admin Interface)
@@ -435,11 +442,12 @@ Django
 <img src="./images/cf.png" alt="Picture" width="auto" height="auto">
 
 ---
-### Function Based Views in Django
+
+## Function Based Views in Django
 
 - Function based views are written using a function in python which receives as an argument HttpRequest object and returns an HttpResponse Object. Function based views are generally divided into 4 basic strategies, i.e., CRUD (Create, Retrieve, Update, Delete). CRUD is the base of any framework one is using for development. 
   
-  ````
+````python
   from django.http import HttpResponse
   def dashboard_view(request):
       if request.method == 'GET'
@@ -447,41 +455,46 @@ Django
       else:
           # send status= 405 which means method not allowed
           return HttpResponse(status=405)
-    ````
+````
+
 ---
-### Class Based Views in Django
+
+## Class Based Views in Django
 
 - Class-based views provide an alternative way to implement views as Python objects instead of functions. They do not replace function-based views, but have certain differences and advantages when compared to function-based views.
   1. Organization of code related to specific HTTP methods (GET, POST, etc.) can be addressed by separate methods instead of conditional branching.
   2. Object oriented techniques such as mixins (multiple inheritance) can be used to factor code into reusable components.
-   
-   ````
-    from django.http import HttpResponse  
-    from django.views import View  
-    class NewView(View):  
-    def get(self, request):  
-        # View logic will place here  
-        return HttpResponse('response')  
-   ````
+
+````python
+ from django.http import HttpResponse  
+ from django.views import View  
+ class NewView(View):  
+ def get(self, request):  
+     # View logic will place here  
+     return HttpResponse('response')  
+````
+
 ---
 
-### Generic Class-Based Views
+## Generic Class-Based Views
 
 - Class Based Views (GCBVs). These are pre-built, reusable views that handle common patterns in web development. They’re designed to simplify your code even more by providing ready-to-use implementations for common tasks.
-  ````
-  from django.views.generic import ListView
-  from .models import Book
 
-  class BookListView(ListView):
-      model = Book
-      template_name = 'book_list.html'
-      context_object_name = 'books'
-  ````
+````python
+from django.views.generic import ListView
+from .models import Book
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'book_list.html'
+    context_object_name = 'books'
+````
+
 - simply fetched all the Book’s objects from the db and passes those objects to specific template.
 
 ---
 
-### When?
+## When?
 
 - Use Class-Based Views when?
   - You need full control: CBVs allow you to define exactly how your view behaves
@@ -492,14 +505,16 @@ Django
   - You’re performing common operations: If you’re doing standard CRUD operations, GCBVs can save you a lot of time.
   - You want to leverage built-in functionality: GCBVs come with features like pagination and form handling out of the box.
   - You’re aiming for rapid development: GCBVs can significantly speed up your development process for standard web applications.
+
 ---
-### What is Middleware in Django?
+
+## What is Middleware in Django?
 
 <img src="./images/midwa.png" alt="Picture" width="auto" height="auto">
 
 - Middleware is a set of hooks into Django's request/response processing pipeline.
 
-### How does Middleware work?
+## How does Middleware work?
 
 - When a user makes a request from your application, a WSGI handler is instantiated, which handles the following things:
   1. Imports project’s settings.py file and Django exception classes.
@@ -513,28 +528,31 @@ Django
   9. Loops through each of the response methods in the reverse order from request middleware.
   10. Builds a return value and makes a call to the callback function.
 
-### What are the types of Middleware?
+## What are the types of Middleware?
+
 - There are two types of Middleware in Django:
   - Built-in Middleware
   - Custom Middleware
 
 - Built-in Middleware are provided by default in Django when you create your project. You can check the default Middleware in settings.py file of your project.
 
-    ````
-    MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
-    ````
+````python
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+````
+
 - Custom Middleware — You can write your own middleware which can be used throughout your project. Let’s see how we can do that!
+
 ---
 
-### What is the purpose of the manage.py file ?
+## What is the purpose of the manage.py file ?
 
 - The manage.py file in a Django project serves as a command-line utility that helps manage various aspects of the project. It is a convenient tool that allows developers to perform tasks such as running development servers, creating database tables, executing tests, and managing Django applications.
 
@@ -609,6 +627,7 @@ Django
 - Django provides a feature to prevent such types of malicious attacks. When a user is authenticated and surfing on the website, Django generates a unique CSRF token for each session. This token is included in forms or requests sent by the user and is checked by the server to verify that the request is coming from the authenticated user and not from a malicious source.
 
 ---
+
 # Resources:
 
 - [Django](https://www.djangoproject.com/)
