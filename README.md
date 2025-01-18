@@ -18,6 +18,7 @@
 | **Template Engine**   | Jinja2 (default)                          | Django Template Language         |
 | **REST API Support**  | Requires extensions (e.g., Flask-RESTful) | Built-in (Django REST Framework) |
 | **Community**         | Large, but smaller than Django            | Very large and mature            |
+
 ---
 
 ## What is Django?
